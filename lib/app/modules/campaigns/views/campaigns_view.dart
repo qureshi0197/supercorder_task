@@ -9,7 +9,7 @@ class CampaignsView extends GetView<CampaignsController> {
   Widget _buildCampaignCard(String imageUrl) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      padding: const EdgeInsets.all(12),
+      // padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -20,11 +20,7 @@ class CampaignsView extends GetView<CampaignsController> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Container(
-              width: 70,
-              height: 70,
-              color: Colors.amber,
-            ), //Image.asset('assets/images/dummy_image.png', width: 70, height: 70, fit: BoxFit.cover),
+            child: Image.asset('assets/images/dummy_image.png', width: 90, height: 90, fit: BoxFit.cover),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -39,7 +35,7 @@ class CampaignsView extends GetView<CampaignsController> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 24),
                 Row(
                   children: const [
                     _CategoryChip(label: 'tag_fnb'),
@@ -68,7 +64,7 @@ class CampaignsView extends GetView<CampaignsController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             const CustomPageHeader(title: 'campaign_matching'),
 
             // Tab bar

@@ -181,12 +181,12 @@ class ProfileView extends GetView<ProfileController> {
           border: Border(bottom: BorderSide(color: Color(0xFFE0E0E0), width: 1)),
         ),
         child: ListTile(
-          // leading: SvgPicture.asset(
-          //   iconUrl,
-          //   width: 23,
-          //   height: 16,
-          //   colorFilter: const ColorFilter.mode(Color(0xFF888888), BlendMode.srcIn),
-          // ),
+          leading: SvgPicture.asset(
+            iconUrl,
+            width: 23,
+            height: 16,
+            colorFilter: const ColorFilter.mode(Color(0xFF888888), BlendMode.srcIn),
+          ),
           title: Text(title),
           onTap: route != null ? () => Get.toNamed(route) : null,
           trailing: const Icon(Icons.chevron_right),
