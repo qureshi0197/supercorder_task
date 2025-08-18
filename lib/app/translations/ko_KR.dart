@@ -15,5 +15,13 @@ const Map<String, String> koKR = {
   'current_password': '기본 비밀번호',
   'new_password': '새 비밀번호',
   'confirm_password': '비밀번호 확인',
+  'campaign_title': '회사명 나오는 자리',
+  'campaign_subtitle': '소개말 나오는 자리입니다 한줄만 나옵니다...',
+  'tag_fnb': 'F&B',
+  'tag_fashion': '패션',
+  'tag_kids': '육아/키즈',
+  'tag_living': '리빙/인테리어',
+  'campaign_matching': '캠페인 매칭',
+
 
 };

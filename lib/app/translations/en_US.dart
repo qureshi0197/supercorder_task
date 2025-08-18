@@ -15,5 +15,13 @@ const Map<String, String> enUS = {
   'current_password': 'Current Password',
   'new_password': 'New Password',
   'confirm_password': 'Confirm Password',
+  'campaign_title': 'Company Name',
+  'campaign_subtitle': 'This is where the description goes...',
+  'tag_fnb': 'F&B',
+  'tag_fashion': 'Fashion',
+  'tag_kids': 'Kids',
+  'tag_living': 'Living / Interior',
+  'campaign_matching': 'Campaign Matching',
+
 
 };

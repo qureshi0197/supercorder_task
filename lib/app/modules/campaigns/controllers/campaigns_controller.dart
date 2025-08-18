@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,3 +19,11 @@ class CampaignsController extends GetxController with GetSingleTickerProviderSta
     super.onClose();
   }
 }
+
+class CampaignModel {
+  final String title;
+  Rx<File?> imageFile;
+
+  CampaignModel({required this.title, File? initialFile}) : imageFile = Rx<File?>(initialFile);
+}
+

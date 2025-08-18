@@ -24,6 +24,13 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.splash,
       initialBinding: InitialBinding(),
       getPages: AppPages.routes,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color(0xFF7A32F5), // keep your brand color
+          surface: Colors.white,
+        ),
+        scaffoldBackgroundColor: Colors.white,
+      ),
     );
   }
 }
