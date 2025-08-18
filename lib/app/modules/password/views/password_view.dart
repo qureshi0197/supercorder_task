@@ -14,18 +14,25 @@ class PasswordView extends GetView<PasswordController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextField(obscureText: true, decoration: const InputDecoration(labelText: '기본 비밀번호')),
-            const SizedBox(height: 12),
-            TextField(obscureText: true, decoration: const InputDecoration(labelText: '새 비밀번호')),
-            const SizedBox(height: 12),
-            TextField(obscureText: true, decoration: const InputDecoration(labelText: '비밀번호 확인')),
-            const Spacer(),
-            ElevatedButton(
-              onPressed: () {
-                // TODO: validate and save
-              },
-              child: const Text('완료'),
+            TextField(
+              controller: controller.currentCtrl,
+              obscureText: true,
+              decoration: InputDecoration(labelText: 'current_password'.tr),
             ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: controller.newCtrl,
+              obscureText: true,
+              decoration: InputDecoration(labelText: 'new_password'.tr),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: controller.confirmCtrl,
+              obscureText: true,
+              decoration: InputDecoration(labelText: 'confirm_password'.tr),
+            ),
+            const Spacer(),
+            ElevatedButton(onPressed: () => controller.validateAndSubmit(), child: Text('complete'.tr)),
           ],
         ),
       ),

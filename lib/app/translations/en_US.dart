@@ -10,5 +10,10 @@ const Map<String, String> enUS = {
   'set_password': 'Set Password',
   'camera': 'Camera',
   'gallery': 'Gallery',
+  'password_not_match': 'Passwords do not match',
+  'password_updated': 'Password updated',
+  'current_password': 'Current Password',
+  'new_password': 'New Password',
+  'confirm_password': 'Confirm Password',
 
 };

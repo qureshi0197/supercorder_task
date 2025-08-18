@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:supercoder_task/app/modules/password/bindings/password_binding.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
@@ -14,19 +15,11 @@ class AppPages {
   static const initial = Routes.splash;
 
   static final routes = [
-    GetPage(
-      name: Routes.splash,
-      page: () => const SplashView(),
-      binding: SplashBinding(), // <— add this
-    ),
-    GetPage(
-      name: Routes.profile,
-      page: () => const ProfileView(),
-      binding: ProfileBinding(), // <-- add this
-    ),
+    GetPage(name: Routes.splash, page: () => const SplashView(), binding: SplashBinding()),
+    GetPage(name: Routes.profile, page: () => const ProfileView(), binding: ProfileBinding()),
     GetPage(name: Routes.campaigns, page: () => const CampaignsView()),
     GetPage(name: Routes.info, page: () => const InfoView()),
     GetPage(name: Routes.basicInfo, page: () => const BasicInfoView()),
-    GetPage(name: Routes.password, page: () => const PasswordView()),
+    GetPage(name: Routes.password, page: () => const PasswordView(), binding: PasswordBinding()),
   ];
 }
