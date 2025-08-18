@@ -1,8 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 import '../../../services/permission_service.dart';
 import '../controllers/profile_controller.dart';
 import '../../../routes/app_routes.dart';
@@ -26,7 +27,7 @@ class ProfileView extends GetView<ProfileController> {
     if (source == ImageSource.gallery) {
       granted = await permissionService.requestStorage();
     } else {
-      granted = await Permission.camera.request().isGranted;
+      granted = await permissionService.requestCamera();
     }
 
     if (!granted) return;
@@ -83,30 +84,40 @@ class ProfileView extends GetView<ProfileController> {
               children: [
                 // const SizedBox(width: 12),
                 Expanded(child: Text('${'hello'.tr},\nAbdullah Qureshi', style: Theme.of(context).textTheme.bodyLarge)),
-                GestureDetector(
-                  onTap: _showPicker,
-                  child: Container(
-                    width: 92,
-                    height: 92,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFE5E5E5), // light grey background
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/ic_5_camera.svg',
-                          width: 23,
-                          height: 16,
-                          colorFilter: const ColorFilter.mode(Color(0xFF888888), BlendMode.srcIn),
+                Obx(() {
+                  final imagePath = controller.profileImagePath.value;
+
+                  // If no image selected → show placeholder
+                  if (imagePath.isEmpty) {
+                    return GestureDetector(
+                      onTap: _showPicker,
+                      child: Container(
+                        width: 92,
+                        height: 92,
+                        decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFFE5E5E5)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/ic_5_camera.svg',
+                              width: 20,
+                              height: 20,
+                              colorFilter: const ColorFilter.mode(Color(0xFF888888), BlendMode.srcIn),
+                            ),
+                            const SizedBox(height: 6),
+                            Text('upload_image'.tr, style: const TextStyle(fontSize: 12, color: Color(0xFF888888))),
+                          ],
                         ),
-                        const SizedBox(height: 6),
-                        Text('upload_image'.tr, style: const TextStyle(fontSize: 12, color: Color(0xFF888888))),
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
+                    );
+                  }
+
+                  // If image selected → show the image
+                  return GestureDetector(
+                    onTap: _showPicker,
+                    child: CircleAvatar(radius: 46, backgroundImage: FileImage(File(imagePath))),
+                  );
+                }),
               ],
             ),
           ),
@@ -137,13 +148,13 @@ class ProfileView extends GetView<ProfileController> {
           Expanded(
             child: ListView(
               children: [
-                _buildMenuItem('my_info'.tr, Routes.info),
-                _buildMenuItem('공지사항', null),
-                _buildMenuItem('1:1문의', null),
-                _buildMenuItem('FAQ', null),
-                _buildMenuItem('약관 및 정책', null),
-                _buildMenuItem('로그아웃', null),
-                _buildMenuItem('회원탈퇴', null),
+                _buildMenuItem('my_info'.tr, Routes.info, 'assets/icons/user.svg'),
+                _buildMenuItem('공지사항', null, 'assets/icons/note.svg'),
+                _buildMenuItem('1:1문의', null, 'assets/icons/messages.svg'),
+                _buildMenuItem('FAQ', null, 'assets/icons/message-question.svg'),
+                _buildMenuItem('약관 및 정책', null, 'assets/icons/task-square.svg'),
+                _buildMenuItem('로그아웃', null, 'assets/icons/logout.svg'),
+                _buildMenuItem('회원탈퇴', null, 'assets/icons/break-away.svg'),
               ],
             ),
           ),
@@ -162,7 +173,7 @@ class ProfileView extends GetView<ProfileController> {
     );
   }
 
-  Widget _buildMenuItem(String title, String? route) {
+  Widget _buildMenuItem(String title, String? route, String iconUrl) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),
       child: Container(
@@ -170,7 +181,12 @@ class ProfileView extends GetView<ProfileController> {
           border: Border(bottom: BorderSide(color: Color(0xFFE0E0E0), width: 1)),
         ),
         child: ListTile(
-          leading: const Icon(Icons.chevron_right),
+          // leading: SvgPicture.asset(
+          //   iconUrl,
+          //   width: 23,
+          //   height: 16,
+          //   colorFilter: const ColorFilter.mode(Color(0xFF888888), BlendMode.srcIn),
+          // ),
           title: Text(title),
           onTap: route != null ? () => Get.toNamed(route) : null,
           trailing: const Icon(Icons.chevron_right),

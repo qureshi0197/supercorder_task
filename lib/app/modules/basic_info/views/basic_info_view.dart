@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supercoder_task/app/widgets/custom_page_header.dart';
 import '../../../services/permission_service.dart';
+import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../controllers/basic_info_controller.dart';
 
@@ -36,14 +37,11 @@ class BasicInfoView extends GetView<BasicInfoController> {
                     child: CustomTextField(label: 'phone', placeholder: 'phone_placeholder', controller: controller.phoneCtrl),
                   ),
                   const SizedBox(width: 8),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF430D7D),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                    ),
-                    onPressed: () {},
-                    child: Text('change'.tr, style: const TextStyle(color: Colors.white)),
+                  Column(
+                    children: [
+                      SizedBox(height: 25),
+                      CustomButton(text: 'change', onPressed: () {}, height: 50),
+                    ],
                   ),
                 ],
               ),
@@ -66,16 +64,11 @@ class BasicInfoView extends GetView<BasicInfoController> {
                   icon: const Icon(Icons.attach_file),
                   color: Colors.grey,
                   onPressed: () async {
-                    final ps = Get.find<PermissionService>();
-                    final granted = await ps.requestStorage();
-                    if (granted) {
+                    final permissionService = Get.find<PermissionService>();
+                    if (await permissionService.requestStorage()) {
                       final result = await FilePicker.platform.pickFiles();
-                      if (result != null) {
-                        final filePath = result.files.single.path;
-                        if (filePath != null) {
-                          controller.workLinkCtrl.text = filePath.split('/').last; // show file name
-                          Get.snackbar('file_selected'.tr, filePath);
-                        }
+                      if (result != null && result.files.single.path != null) {
+                        Get.snackbar('file_selected'.tr, result.files.single.path!);
                       }
                     }
                   },

@@ -1,16 +1,22 @@
-# supercoder_task
+# 🛠️ MY FLYN – Flutter Technical Assignment
 
-A new Flutter project.
+This project is a pixel-perfect implementation of the provided Figma UI for the MY FLYN mobile app.  
+It follows the required **GetX architecture**, uses **native permission handling**, and keeps all UI text fully **localizable** (Korean↔English).
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## ✅ Installation & Run Instructions
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+# 1 — Clone the repository
+git clone <your-repo-url>
+cd supercoder_task
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# 2 — Install dependencies
+flutter pub get
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# 3 — Configured iOS permissions
+Added Photo & Camera usage descriptions to ios/Runner/Info.plist
+
+# 4 — Run
+flutter run

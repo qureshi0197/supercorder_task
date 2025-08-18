@@ -41,5 +41,8 @@ const Map<String, String> enUS = {
   'confirm_placeholder': 'Please re-enter the password',
   'complete': 'Complete',
   'upload_image': 'Add Image',
+  'photo_permission_required': 'Photo library permission is required',
+  'storage_permission_required': 'Storage permission is required',
+  'camera_permission_required': 'Camera permission is required',
 
 };

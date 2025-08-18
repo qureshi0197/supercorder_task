@@ -41,6 +41,8 @@ const Map<String, String> koKR = {
   'confirm_placeholder': '비밀번호를 재입력해 주세요.',
   'complete': '완료',
   'upload_image': '이미지 등록',
-
+  'photo_permission_required': '사진 라이브러리 권한이 필요합니다',
+  'storage_permission_required': '저장소 권한이 필요합니다',
+  'camera_permission_required': '카메라 권한이 필요합니다',
 
 };
