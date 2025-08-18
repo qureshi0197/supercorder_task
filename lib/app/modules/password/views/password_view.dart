@@ -9,7 +9,26 @@ class PasswordView extends GetView<PasswordController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('set_password'.tr)),
-      body: Center(child: Text('set_password'.tr)),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextField(obscureText: true, decoration: const InputDecoration(labelText: '기본 비밀번호')),
+            const SizedBox(height: 12),
+            TextField(obscureText: true, decoration: const InputDecoration(labelText: '새 비밀번호')),
+            const SizedBox(height: 12),
+            TextField(obscureText: true, decoration: const InputDecoration(labelText: '비밀번호 확인')),
+            const Spacer(),
+            ElevatedButton(
+              onPressed: () {
+                // TODO: validate and save
+              },
+              child: const Text('완료'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

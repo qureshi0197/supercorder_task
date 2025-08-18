@@ -8,4 +8,7 @@ const Map<String, String> enUS = {
   'my_info': 'My Information',
   'basic_info': 'Basic Information',
   'set_password': 'Set Password',
+  'camera': 'Camera',
+  'gallery': 'Gallery',
+
 };

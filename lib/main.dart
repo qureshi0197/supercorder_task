@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:supercoder_task/app/routes/app_routes.dart';
+import 'package:supercoder_task/bindings/initial_binding.dart';
 import 'app/routes/app_pages.dart';
 import 'app/translations/en_US.dart';
 import 'app/translations/ko_KR.dart';
@@ -16,13 +18,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      translationsKeys: {
-        'en_US': enUS,
-        'ko_KR': koKR,
-      },
+      translationsKeys: {'en_US': enUS, 'ko_KR': koKR},
       locale: const Locale('ko', 'KR'), // default = Korean
       fallbackLocale: const Locale('en', 'US'),
-      initialRoute: AppPages.initial,
+      initialRoute: Routes.splash,
+      initialBinding: InitialBinding(),
       getPages: AppPages.routes,
     );
   }

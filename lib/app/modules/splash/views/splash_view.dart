@@ -7,6 +7,14 @@ class SplashView extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('splash_title'.tr)));
+    print('SplashView BUILD called');
+    return Scaffold(
+      body: Container(
+        color: const Color(0xFF430D7D), // Splash background color
+        child: Center(
+          child: Text('MY FLYN', style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
+        ),
+      ),
+    );
   }
 }

@@ -8,8 +8,25 @@ class CampaignsView extends GetView<CampaignsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('my_campaigns'.tr)),
-      body: Center(child: Text('application'.tr)),
+      appBar: AppBar(
+        title: Text('my_campaigns'.tr),
+        bottom: TabBar(
+          controller: controller.tabController,
+          tabs: [
+            Tab(text: 'application'.tr),
+            Tab(text: 'in_progress'.tr),
+            Tab(text: 'completed'.tr),
+          ],
+        ),
+      ),
+      body: TabBarView(
+        controller: controller.tabController,
+        children: const [
+          Center(child: Text('Application List')),
+          Center(child: Text('In Progress List')),
+          Center(child: Text('Completed List')),
+        ],
+      ),
     );
   }
 }
