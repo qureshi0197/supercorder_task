@@ -5,6 +5,8 @@ class PasswordController extends GetxController {
   final currentCtrl = TextEditingController();
   final newCtrl = TextEditingController();
   final confirmCtrl = TextEditingController();
+  final isValid = false.obs;
+
 
   void validateAndSubmit() {
     if (newCtrl.text != confirmCtrl.text) {

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../widgets/custom_button.dart';
+import '../../../widgets/custom_page_header.dart';
+import '../../../widgets/custom_text_field.dart';
 import '../controllers/password_controller.dart';
 
 class PasswordView extends GetView<PasswordController> {
@@ -8,31 +11,37 @@ class PasswordView extends GetView<PasswordController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('set_password'.tr)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextField(
+            const SizedBox(height: 20),
+            const CustomPageHeader(title: 'set_password'),
+            CustomTextField(
+              label: 'current_password',
+              placeholder: 'password_placeholder',
               controller: controller.currentCtrl,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'current_password'.tr),
+              required: true,
             ),
             const SizedBox(height: 12),
-            TextField(
-              controller: controller.newCtrl,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'new_password'.tr),
-            ),
+            CustomTextField(label: 'new_password', placeholder: 'password_placeholder', controller: controller.newCtrl, required: true),
             const SizedBox(height: 12),
-            TextField(
+            CustomTextField(
+              label: 'confirm_password',
+              placeholder: 'confirm_placeholder',
               controller: controller.confirmCtrl,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'confirm_password'.tr),
+              required: true,
             ),
             const Spacer(),
-            ElevatedButton(onPressed: () => controller.validateAndSubmit(), child: Text('complete'.tr)),
+            Obx(
+              () => CustomButton(
+                text: 'complete',
+                onPressed: controller.isValid.value ? () => controller.validateAndSubmit() : null,
+                height: 48,
+                width: double.infinity,
+              ),
+            ),
           ],
         ),
       ),

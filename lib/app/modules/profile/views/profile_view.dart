@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -83,15 +82,30 @@ class ProfileView extends GetView<ProfileController> {
             child: Row(
               children: [
                 // const SizedBox(width: 12),
-                Expanded(child: Text('${'hello'.tr}, 홍길동님', style: Theme.of(context).textTheme.bodyLarge)),
+                Expanded(child: Text('${'hello'.tr},\nAbdullah Qureshi', style: Theme.of(context).textTheme.bodyLarge)),
                 GestureDetector(
                   onTap: _showPicker,
-                  child: Obx(() {
-                    if (controller.profileImagePath.value.isEmpty) {
-                      return const CircleAvatar(radius: 30, backgroundColor: Colors.grey);
-                    }
-                    return CircleAvatar(radius: 30, backgroundImage: FileImage(File(controller.profileImagePath.value)));
-                  }),
+                  child: Container(
+                    width: 92,
+                    height: 92,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFE5E5E5), // light grey background
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/ic_5_camera.svg',
+                          width: 23,
+                          height: 16,
+                          colorFilter: const ColorFilter.mode(Color(0xFF888888), BlendMode.srcIn),
+                        ),
+                        const SizedBox(height: 6),
+                        Text('upload_image'.tr, style: const TextStyle(fontSize: 12, color: Color(0xFF888888))),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -108,7 +122,9 @@ class ProfileView extends GetView<ProfileController> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _buildCampaignItem('application'.tr, '0'),
+                  Icon(Icons.arrow_forward_ios_rounded, size: 14),
                   _buildCampaignItem('in_progress'.tr, '0'),
+                  Icon(Icons.arrow_forward_ios_rounded, size: 14),
                   _buildCampaignItem('completed'.tr, '0'),
                 ],
               ),
@@ -147,6 +163,20 @@ class ProfileView extends GetView<ProfileController> {
   }
 
   Widget _buildMenuItem(String title, String? route) {
-    return ListTile(title: Text(title), onTap: route != null ? () => Get.toNamed(route) : null, trailing: const Icon(Icons.chevron_right));
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),
+      child: Container(
+        decoration: const BoxDecoration(
+          border: Border(bottom: BorderSide(color: Color(0xFFE0E0E0), width: 1)),
+        ),
+        child: ListTile(
+          leading: const Icon(Icons.chevron_right),
+          title: Text(title),
+          onTap: route != null ? () => Get.toNamed(route) : null,
+          trailing: const Icon(Icons.chevron_right),
+          visualDensity: const VisualDensity(horizontal: -4),
+        ),
+      ),
+    );
   }
 }

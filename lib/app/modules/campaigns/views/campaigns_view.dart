@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../widgets/custom_page_header.dart';
 import '../controllers/campaigns_controller.dart';
 
 class CampaignsView extends GetView<CampaignsController> {
@@ -61,24 +62,56 @@ class CampaignsView extends GetView<CampaignsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('campaign_matching'.tr),
-        bottom: TabBar(
-          controller: controller.tabController,
-          tabs: [
-            Tab(text: 'application'.tr),
-            Tab(text: 'in_progress'.tr),
-            Tab(text: 'completed'.tr),
+      appBar: null,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 20),
+            const CustomPageHeader(title: 'campaign_matching'),
+
+            // Tab bar
+            TabBar(
+              controller: controller.tabController,
+              labelColor: Colors.black,
+              unselectedLabelColor: Colors.grey,
+              labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+              indicatorSize: TabBarIndicatorSize.tab,
+              tabs: [
+                Tab(text: 'application'.tr),
+                Tab(text: 'in_progress'.tr),
+                Tab(text: 'completed'.tr),
+              ],
+            ),
+
+            // Tab bar view (expanded for scroll)
+            Expanded(
+              child: TabBarView(
+                controller: controller.tabController,
+                children: [
+                  ShaderMask(
+                    shaderCallback: (Rect bounds) {
+                      return const LinearGradient(
+                        begin: Alignment.center,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.black,
+                          Colors.transparent, // <-- fade to transparent
+                        ],
+                        stops: [0.8, 1.0],
+                      ).createShader(bounds);
+                    },
+                    blendMode: BlendMode.dstIn,
+                    child: ListView(padding: EdgeInsets.zero, children: List.generate(10, (i) => _buildCampaignCard('dummy_image.png'))),
+                  ),
+                  Center(child: Text('in_progress'.tr)),
+                  Center(child: Text('completed'.tr)),
+                ],
+              ),
+            ),
           ],
         ),
-      ),
-      body: TabBarView(
-        controller: controller.tabController,
-        children: [
-          ListView(children: List.generate(15, (index) => _buildCampaignCard('assets/images/dummy_image.png'))),
-          Center(child: Text('in_progress'.tr)),
-          Center(child: Text('completed'.tr)),
-        ],
       ),
     );
   }

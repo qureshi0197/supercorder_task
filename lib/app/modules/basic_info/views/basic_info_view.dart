@@ -1,7 +1,9 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:supercoder_task/app/widgets/custom_page_header.dart';
 import '../../../services/permission_service.dart';
+import '../../../widgets/custom_text_field.dart';
 import '../controllers/basic_info_controller.dart';
 
 class BasicInfoView extends GetView<BasicInfoController> {
@@ -10,64 +12,84 @@ class BasicInfoView extends GetView<BasicInfoController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('basic_info'.tr)),
+      // appBar: AppBar(title: Text('basic_info'.tr)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TextField(
-                decoration: InputDecoration(
-                  labelText: '아이디', // ID
-                  enabled: false,
-                ),
-              ),
+              SizedBox(height: 20),
+              const CustomPageHeader(title: 'basic_info'),
+              // ID (disabled)
+              CustomTextField(label: 'id', placeholder: 'id_placeholder', controller: controller.idCtrl),
               const SizedBox(height: 12),
-              TextField(decoration: const InputDecoration(labelText: '이메일')),
+
+              // Email
+              CustomTextField(label: 'email', placeholder: 'email_placeholder', controller: controller.emailCtrl),
               const SizedBox(height: 12),
+
+              // Phone + Change button in Row
               Row(
                 children: [
                   Expanded(
-                    child: TextField(decoration: const InputDecoration(labelText: '휴대폰 번호')),
+                    child: CustomTextField(label: 'phone', placeholder: 'phone_placeholder', controller: controller.phoneCtrl),
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: () {
-                      // Placeholder (static)
-                    },
-                    child: const Text('변경'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF430D7D),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                    ),
+                    onPressed: () {},
+                    child: Text('change'.tr, style: const TextStyle(color: Colors.white)),
                   ),
                 ],
               ),
               const SizedBox(height: 12),
-              const TextField(decoration: InputDecoration(labelText: '닉네임')),
+
+              // Nickname
+              CustomTextField(label: 'nickname', placeholder: 'nickname_placeholder', controller: controller.nickCtrl),
               const SizedBox(height: 12),
-              const TextField(decoration: InputDecoration(labelText: '인스타그램 아이디')),
+
+              // Insta
+              CustomTextField(label: 'instagram_id', placeholder: 'instagram_placeholder', controller: controller.instagramCtrl),
               const SizedBox(height: 12),
-              const TextField(decoration: InputDecoration(labelText: '대표 작업 링크')),
-              const SizedBox(height: 12),
-              ElevatedButton(
-                onPressed: () async {
-                  final permissionService = Get.find<PermissionService>();
-                  final granted = await permissionService.requestStorage();
-                  if (granted) {
-                    // pick file
-                    final result = await FilePicker.platform.pickFiles();
-                    if (result != null) {
-                      final filePath = result.files.single.path;
-                      if (filePath != null) {
-                        Get.snackbar('File selected', filePath);
+
+              // Portfolio Link
+              CustomTextField(
+                label: 'work_link',
+                placeholder: 'work_link_placeholder',
+                controller: controller.workLinkCtrl,
+                trailing: IconButton(
+                  icon: const Icon(Icons.attach_file),
+                  color: Colors.grey,
+                  onPressed: () async {
+                    final ps = Get.find<PermissionService>();
+                    final granted = await ps.requestStorage();
+                    if (granted) {
+                      final result = await FilePicker.platform.pickFiles();
+                      if (result != null) {
+                        final filePath = result.files.single.path;
+                        if (filePath != null) {
+                          controller.workLinkCtrl.text = filePath.split('/').last; // show file name
+                          Get.snackbar('file_selected'.tr, filePath);
+                        }
                       }
                     }
-                  }
-                },
-                child: Text('upload_portfolio'.tr),
+                  },
+                ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 12),
               ElevatedButton(
-                onPressed: null, // Disabled for now
-                child: const Text('저장'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFcecece),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                ),
+                onPressed: null,
+                child: Text('save'.tr, style: const TextStyle(color: Colors.white)),
               ),
             ],
           ),

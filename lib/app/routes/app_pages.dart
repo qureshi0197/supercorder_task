@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:supercoder_task/app/modules/basic_info/bindings/basic_info_binding.dart';
 import 'package:supercoder_task/app/modules/campaigns/bindings/campaigns_binding.dart';
 import 'package:supercoder_task/app/modules/password/bindings/password_binding.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -20,7 +21,7 @@ class AppPages {
     GetPage(name: Routes.profile, page: () => const ProfileView(), binding: ProfileBinding()),
     GetPage(name: Routes.campaigns, page: () => const CampaignsView(), binding: CampaignsBinding()),
     GetPage(name: Routes.info, page: () => const InfoView()),
-    GetPage(name: Routes.basicInfo, page: () => const BasicInfoView()),
+    GetPage(name: Routes.basicInfo, page: () => const BasicInfoView(), binding: BasicInfoBinding()),
     GetPage(name: Routes.password, page: () => const PasswordView(), binding: PasswordBinding()),
   ];
 }
