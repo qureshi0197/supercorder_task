@@ -13,7 +13,6 @@ class PasswordController extends GetxController {
       Get.snackbar('Error', 'password_not_match'.tr);
       return;
     }
-    // Here you can call API or update state
     Get.snackbar('Success', 'password_updated'.tr);
   }
 

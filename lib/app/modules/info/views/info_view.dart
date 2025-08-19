@@ -10,7 +10,6 @@ class InfoView extends GetView<InfoController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text('my_info'.tr)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -45,7 +44,6 @@ class InfoView extends GetView<InfoController> {
               child: const ListTile(
                 title: Text('관심 카테고리'), // Interest Category (placeholder)
                 trailing: Icon(Icons.chevron_right),
-                // onTap: null  (placeholder - no navigation yet)
               ),
             ),
           ],

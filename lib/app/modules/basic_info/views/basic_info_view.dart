@@ -13,7 +13,6 @@ class BasicInfoView extends GetView<BasicInfoController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text('basic_info'.tr)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(

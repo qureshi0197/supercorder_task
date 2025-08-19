@@ -9,7 +9,6 @@ class CampaignsController extends GetxController with GetSingleTickerProviderSta
   @override
   void onInit() {
     super.onInit();
-    // initialIndex = 0 for "application"
     tabController = TabController(length: 3, vsync: this, initialIndex: 0);
   }
 

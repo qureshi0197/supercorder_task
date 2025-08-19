@@ -82,7 +82,6 @@ class ProfileView extends GetView<ProfileController> {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
-                // const SizedBox(width: 12),
                 Expanded(child: Text('${'hello'.tr},\nAbdullah Qureshi', style: Theme.of(context).textTheme.bodyLarge)),
                 Obx(() {
                   final imagePath = controller.profileImagePath.value;
